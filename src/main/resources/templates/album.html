@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Muziek</title>
+    <link rel="stylesheet" th:href="@{/css/muziek.css}">
+</head>
+<body>
+
+<div th:if="${album}">
+    <h1 th:text="|${album.naam}  (${album.getArtiest().naam})|"></h1>
+
+    <div th:if="${tracks}">
+        <ul>
+            <li th:each="track:${tracks}" th:text="|${track.naam} -- ${track.tijd}|"></li>
+        </ul>
+        <div>
+            <label th:text="|Totale tijd: ${totaletracktijd}|"></label>
+        </div>
+    </div>
+
+    <form method="post" th:action="@{/albums}">
+        <label>Score:
+            <input type="number" th:field="${album.score}" autofocus required>
+        </label>
+        <button>Wijzigen</button>
+    </form>
+
+</div>
+
+<p th:if="not ${album}">Geen album te tonen !</p>
+
+<footer>
+    <a th:href="@{/}">Back</a>
+</footer>
+
+</body>
+</html>

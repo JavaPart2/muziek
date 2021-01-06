@@ -1,6 +1,9 @@
 package be.vdab.muziek.domain;
 
 import javax.persistence.*;
+import java.time.LocalTime;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,6 +28,7 @@ public class Album {
         this.naam = naam;
         this.score = score;
         this.artiest = artiest;
+        this.tracks = new LinkedHashSet<>();
     }
 
     public Album() {
@@ -48,7 +52,7 @@ public class Album {
     }
 
     public Set<Track> getTracks() {
-        return tracks;
+        return Collections.unmodifiableSet(tracks);
     }
 
     public int getId() {
@@ -61,5 +65,17 @@ public class Album {
 
     public int getScore() {
         return score;
+    }
+
+    public LocalTime calculateTotaleTrackTime(){
+        LocalTime som = LocalTime.of(0,0,0);
+
+        this.tracks.stream().forEach(track -> {
+            som.plusHours(track.getTijd().getHour())
+                    .plusMinutes(track.getTijd().getMinute())
+                    .plusSeconds(track.getTijd().getSecond());
+        });
+        return som;
+
     }
 }

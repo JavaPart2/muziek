@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Muziek</title>
+    <link rel="stylesheet" th:href="@{/css/muziek.css}">
+</head>
+<body>
+<h1>Albums</h1>
+
+<ul th:if="${albums}">
+    <li th:each="album:${albums}">
+        <a th:text="${album.naam}" th:href="@{/albums/{id}(id=${album.id})}"></a>
+        <span th:text="|   ${album.getArtiest().naam}|"></span>
+    </li>
+</ul>
+<p th:if="not ${albums}">Er zijn geen albums gevonden !</p>
+
+</body>
+</html>
