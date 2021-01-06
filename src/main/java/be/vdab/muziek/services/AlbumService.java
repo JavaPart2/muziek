@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface AlbumService {
     List<Album> findAllAlbums();
     Optional<Album> findById(int id);
+    void wijzigScore(int id, int score);
 }

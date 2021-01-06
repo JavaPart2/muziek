@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface AlbumRepository {
     List<Album> findAll();
     Optional<Album> findById(int id);
-
+    void updateScore(int id, int score);
 }

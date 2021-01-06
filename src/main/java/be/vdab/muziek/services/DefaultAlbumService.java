@@ -26,4 +26,9 @@ public class DefaultAlbumService implements AlbumService{
     public Optional<Album> findById(int id) {
         return repository.findById(id);
     }
+
+    @Override
+    public void wijzigScore(int id, int score) {
+        repository.updateScore(id, score);
+    }
 }

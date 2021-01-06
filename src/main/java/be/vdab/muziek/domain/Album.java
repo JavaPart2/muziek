@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Entity
 @Table(name = "albums")
@@ -21,7 +22,6 @@ public class Album {
     private Artiest artiest;
     @ElementCollection
     @CollectionTable(name = "tracks", joinColumns = @JoinColumn(name = "albumid"))
-    @OrderBy("naam")
     private Set<Track> tracks;
 
     public Album(String naam, int score, Artiest artiest) {
@@ -67,15 +67,22 @@ public class Album {
         return score;
     }
 
-    public LocalTime calculateTotaleTrackTime(){
-        LocalTime som = LocalTime.of(0,0,0);
+    public void setScore(int score) {
+        this.score = score;
+    }
 
-        this.tracks.stream().forEach(track -> {
-            som.plusHours(track.getTijd().getHour())
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalTime calculateTotaleTrackTime(){
+        LocalTime som = LocalTime.of(0, 0, 0);
+
+        for(Track track : this.tracks){
+            som = som.plusHours(track.getTijd().getHour())
                     .plusMinutes(track.getTijd().getMinute())
                     .plusSeconds(track.getTijd().getSecond());
-        });
+        }
         return som;
-
     }
 }

@@ -30,4 +30,10 @@ public class JpaAlbumRepository implements AlbumRepository{
     public Optional<Album> findById(int id) {
         return Optional.ofNullable(manager.find(Album.class, id));
     }
+
+    @Override
+    public void updateScore(int id, int score) {
+        findById(id).ifPresent(album -> album.setScore(score));
+        manager.flush();
+    }
 }

@@ -19,10 +19,11 @@
         </div>
     </div>
 
-    <form method="post" th:action="@{/albums}">
+    <form th:object="${album}" method="post" th:action="@{/albums}">
         <label>Score:
-            <input type="number" th:field="${album.score}" autofocus required>
+            <input type="number" th:field="${album.score}" autofocus required />
         </label>
+        <input type="hidden" th:field="${album.id}" />
         <button>Wijzigen</button>
     </form>
 
