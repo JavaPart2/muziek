@@ -1,6 +1,7 @@
 package be.vdab.muziek.services;
 
 import be.vdab.muziek.domain.Album;
+import be.vdab.muziek.exceptions.AlbumNietGevondenException;
 import be.vdab.muziek.repository.AlbumRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,8 @@ public class DefaultAlbumService implements AlbumService{
 
     @Override
     public void wijzigScore(int id, int score) {
-        repository.findById(id).ifPresent(album -> album.setScore(score));
+        repository.findById(id).orElseThrow(() -> new AlbumNietGevondenException())
+                .setScore(score);
+//        repository.findById(id).ifPresent(album -> album.setScore(score));
     }
 }

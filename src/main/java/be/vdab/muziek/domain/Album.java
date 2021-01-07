@@ -1,5 +1,7 @@
 package be.vdab.muziek.domain;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -17,8 +19,7 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String naam;
-    @Min(0)
-    @Max(10)
+    @Range(min = 0, max = 10)
     private int score;
     @ManyToOne(optional = false)
     @JoinColumn(name = "artiestid")

@@ -1,6 +1,7 @@
 package be.vdab.muziek.controllers;
 
 import be.vdab.muziek.domain.Album;
+import be.vdab.muziek.exceptions.AlbumNietGevondenException;
 import be.vdab.muziek.services.AlbumService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -26,7 +27,7 @@ public class AlbumController {
         ModelAndView modelAndView = new ModelAndView("album");
         service.findById(id).ifPresent(album -> {
             modelAndView.addObject("album", album);
-            modelAndView.addObject("tracks", album.getTracks());
+//            modelAndView.addObject("tracks", album.getTracks());
 //            modelAndView.addObject("totaletracktijd", album.calculateTotaleTrackTime());
         });
         return modelAndView;
@@ -37,7 +38,11 @@ public class AlbumController {
         if (errors.hasErrors()){
             return "redirect:/albums/" + album.getId();
         }
-        service.wijzigScore(album.getId(), album.getScore());
-        return "redirect:/albums/" + album.getId();
+        try {
+            service.wijzigScore(album.getId(), album.getScore());
+            return "redirect:/albums/" + album.getId();
+        }catch (AlbumNietGevondenException exception){
+            return "redirect:/albums/" + album.getId();
+        }
     }
 }

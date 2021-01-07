@@ -10,9 +10,9 @@
 <div th:if="${album}">
     <h1 th:text="|${album.naam}  (${album.getArtiest().naam})|"></h1>
 
-    <div th:if="${tracks}">
+    <div th:if="${album.tracks}">
         <ul>
-            <li th:each="track:${tracks}" th:text="|${track.naam} -- ${track.tijd}|"></li>
+            <li th:each="track:${album.tracks}" th:text="|${track.naam} -- ${track.tijd}|"></li>
         </ul>
         <div>
             <label th:text="|Totale tijd: ${album.calculateTotaleTrackTime()}|"></label>
