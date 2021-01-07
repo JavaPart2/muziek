@@ -27,7 +27,7 @@ public class AlbumController {
         service.findById(id).ifPresent(album -> {
             modelAndView.addObject("album", album);
             modelAndView.addObject("tracks", album.getTracks());
-            modelAndView.addObject("totaletracktijd", album.calculateTotaleTrackTime());
+//            modelAndView.addObject("totaletracktijd", album.calculateTotaleTrackTime());
         });
         return modelAndView;
     }

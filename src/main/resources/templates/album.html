@@ -15,13 +15,14 @@
             <li th:each="track:${tracks}" th:text="|${track.naam} -- ${track.tijd}|"></li>
         </ul>
         <div>
-            <label th:text="|Totale tijd: ${totaletracktijd}|"></label>
+            <label th:text="|Totale tijd: ${album.calculateTotaleTrackTime()}|"></label>
         </div>
     </div>
 
     <form th:object="${album}" method="post" th:action="@{/albums}">
         <label>Score:
-            <input type="number" th:field="${album.score}" autofocus required />
+            <input type="number" th:field="${album.score}" min="0" max="10" autofocus required />
+            <span th:errors="${album.score}"></span>
         </label>
         <input type="hidden" th:field="${album.id}" />
         <button>Wijzigen</button>

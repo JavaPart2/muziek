@@ -1,12 +1,13 @@
 package be.vdab.muziek.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Entity
 @Table(name = "albums")
@@ -16,6 +17,8 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String naam;
+    @Min(0)
+    @Max(10)
     private int score;
     @ManyToOne(optional = false)
     @JoinColumn(name = "artiestid")

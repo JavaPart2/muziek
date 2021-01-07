@@ -11,9 +11,9 @@ public class Artiest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String naam;
-    @OneToMany(mappedBy = "artiest")
-    @OrderBy("naam")
-    private Set<Album> albums;
+//    @OneToMany(mappedBy = "artiest")
+//    @OrderBy("naam")
+//    private Set<Album> albums;
 
     public Artiest(String naam) {
         this.naam = naam;
@@ -22,9 +22,9 @@ public class Artiest {
     public Artiest() {
     }
 
-    public Set<Album> getAlbums() {
-        return Collections.unmodifiableSet(albums);
-    }
+//    public Set<Album> getAlbums() {
+//        return Collections.unmodifiableSet(albums);
+//    }
 
     public int getId() {
         return id;

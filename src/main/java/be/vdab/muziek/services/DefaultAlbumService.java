@@ -18,17 +18,19 @@ public class DefaultAlbumService implements AlbumService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Album> findAllAlbums() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Album> findById(int id) {
         return repository.findById(id);
     }
 
     @Override
     public void wijzigScore(int id, int score) {
-        repository.updateScore(id, score);
+        repository.findById(id).ifPresent(album -> album.setScore(score));
     }
 }

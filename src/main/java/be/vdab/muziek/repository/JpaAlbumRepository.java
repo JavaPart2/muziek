@@ -17,13 +17,11 @@ public class JpaAlbumRepository implements AlbumRepository{
 
     @Override
     public List<Album> findAll() {
-        return manager.createQuery("select a from Album a order by a.naam", Album.class)
-                .getResultList();
-/*
+//        return manager.createQuery("select a from Album a order by a.naam", Album.class)
+//                .getResultList();
         return manager.createNamedQuery("Album.findAll", Album.class)
                 .setHint("javax.persistence.loadgraph", manager.createEntityGraph("Album.metArtiest"))
                 .getResultList();
-*/
     }
 
     @Override
@@ -31,9 +29,11 @@ public class JpaAlbumRepository implements AlbumRepository{
         return Optional.ofNullable(manager.find(Album.class, id));
     }
 
+/*
     @Override
     public void updateScore(int id, int score) {
         findById(id).ifPresent(album -> album.setScore(score));
         manager.flush();
     }
+*/
 }
