@@ -43,8 +43,8 @@ public class JpaAlbumRepositoryTest extends AbstractTransactionalJUnit4SpringCon
         Album album = repository.findById(idTestAlbum()).get();
         assertThat(album.getNaam()).isEqualTo("test");
         assertThat(album.getArtiest().getNaam()).isEqualTo("test");
-        assertThat(album.getTracks().stream().findFirst().get().getTijd()).isEqualTo(LocalTime.of(02, 10));
-        assertThat(album.calculateTotaleTrackTime()).isEqualTo(LocalTime.of(02, 10));
+        assertThat(album.getTracks().stream().findFirst().get().getTijd()).isEqualTo(LocalTime.of(01, 10));
+        assertThat(album.calculateTotaleTrackTime()).isEqualTo(LocalTime.of(01, 10));
     }
 
     @Test

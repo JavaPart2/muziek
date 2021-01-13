@@ -10,11 +10,6 @@ public class Track {
     private String naam;
     private LocalTime tijd;
 
-    public Track(String naam, LocalTime tijd) {
-        this.naam = naam;
-        this.tijd = tijd;
-    }
-
     protected Track() {
     }
 

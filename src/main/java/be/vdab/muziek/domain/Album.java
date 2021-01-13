@@ -21,7 +21,7 @@ public class Album {
     private String naam;
     @Range(min = 0, max = 10)
     private int score;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "artiestid")
     private Artiest artiest;
     @ElementCollection
@@ -36,19 +36,6 @@ public class Album {
     }
 
     public Album() {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Album)) return false;
-        Album album = (Album) o;
-        return Objects.equals(naam, album.naam);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(naam);
     }
 
     public Artiest getArtiest() {
