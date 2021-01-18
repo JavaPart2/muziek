@@ -30,6 +30,18 @@ public class JpaAlbumRepositoryTest extends AbstractTransactionalJUnit4SpringCon
         return super.jdbcTemplate.queryForObject("select id from albums where naam='test'", Integer.class);
     }
 
+    private LocalTime leesTestTrackTime(){
+        return super.jdbcTemplate.queryForObject("select tijd from tracks where naam = 'test'", LocalTime.class);
+    }
+
+    private LocalTime leesElegiaTrackTime(){
+        return super.jdbcTemplate.queryForObject("select tijd from tracks where naam = 'Elegia'", LocalTime.class);
+    }
+
+    private LocalTime leesElegiaJoinTrackTime(){
+        return super.jdbcTemplate.queryForObject("select tijd from tracks inner join albums on albums.id = tracks.albumid = albums.id where albums.id = 1 and tracks.naam = 'Elegia'", LocalTime.class);
+    }
+
     @Test
     void findAll(){
         assertThat(repository.findAll()).hasSize(super.countRowsInTable("albums"))
@@ -40,6 +52,12 @@ public class JpaAlbumRepositoryTest extends AbstractTransactionalJUnit4SpringCon
     @Test
     void findById(){
         Album album = repository.findById(idTestAlbum()).get();
+        System.out.println("Tracktime vn test is : " + leesTestTrackTime());
+        System.out.println("Tracktime vn Elegia is : " + leesElegiaTrackTime());
+        System.out.println("Tracktime vn ElegiaJoin is : " + leesElegiaJoinTrackTime());
+        Album elegia = repository.findById(1).get();
+        System.out.println("Tracktime Elegia via album is : " + elegia.getTracks().toString());
+        album.getTracks().stream().findFirst().ifPresent(track -> System.out.println("Tracktime test via album" + track.getTijd()));
         assertThat(album.getNaam()).isEqualTo("test");
         assertThat(album.getArtiest().getNaam()).isEqualTo("test");
         assertThat(album.getTracks().stream().findFirst().get().getTijd()).isEqualTo(LocalTime.of(01, 10));

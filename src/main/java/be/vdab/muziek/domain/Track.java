@@ -33,4 +33,12 @@ public class Track {
     public LocalTime getTijd() {
         return tijd;
     }
+
+    @Override
+    public String toString() {
+        return "Track{" +
+                "naam='" + naam + '\'' +
+                ", tijd=" + tijd +
+                '}';
+    }
 }
