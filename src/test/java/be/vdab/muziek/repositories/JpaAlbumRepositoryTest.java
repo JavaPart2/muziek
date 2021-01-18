@@ -9,7 +9,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Table;
 
 import java.time.LocalTime;
 
